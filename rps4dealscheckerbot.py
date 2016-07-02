@@ -8,12 +8,12 @@ import requests
 import json
 import demjson
 import datetime as dt
+import time
 
 def topsubredditresults(subreddit):
   #Returns a list of deals on the top of a subreddit page
 
   urlrequest = 'http://www.reddit.com/r/' + subreddit + '/.json'
-  print(urlrequest)
 
   r = requests.get(urlrequest)
   data = r.json()
@@ -23,6 +23,7 @@ def topsubredditresults(subreddit):
           str(data['error']) + ": "
           + data['message'])
     print("Restarting...")
+    time.sleep(60)
     topsubredditresults(subreddit)
   else:
     datalist = data['data']['children']
